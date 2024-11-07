@@ -9,6 +9,9 @@ body {
   height: 100vh;
   margin: 0;
 }
+h1 {
+  color: rgb(15, 146, 11);
+}
 h2 {
   color: rgb(255, 246, 246);
 }
@@ -64,10 +67,24 @@ button:active {
   size: 400px;
   padding: 10px;
   font-size: 16px;
+  length: 400px;
 }
 .note {
   transition: all 0.2s;
 }
 .note:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+#addNoteButton {
+  padding: 10px;
+  width: 50%;
+  background-color: #2f665a;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  /* Bevel effect */
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.7),
+    3px 3px 5px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.2s;
 }

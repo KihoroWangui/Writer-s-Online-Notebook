@@ -12,7 +12,54 @@
       <textarea id="noteInput" placeholder="Write your note here..."></textarea>
       <button type="button" id="addNoteButton">Add Note</button>
       <div id="notesContainer"></div>
+      </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+      // Select elements for notes
+      const noteInput = document.getElementById("noteInput");
+      const notesContainer = document.getElementById("notesContainer");
+      const addNoteButton = document.getElementById("addNoteButton"); 
+
+      // Load notes from localStorage on page load
+      window.onload = loadNotes;
+
+      function loadNotes() {
+        const notes = JSON.parse(localStorage.getItem("notes")) || [];
+        notesContainer.innerHTML = ""; 
+        notes.forEach((note, index) => displayNote(note, index));
+      }
+
+      function displayNote(content, index) {
+        const noteElement = document.createElement("div");
+        noteElement.classList.add("note");
+        noteElement.innerHTML = `
+                <div class="note-content">${content}</div>
+                <button onclick="deleteNote(${index})">Delete</button>
+            `;
+        notesContainer.appendChild(noteElement);
+      }
+
+      function addNote() {
+        const content = noteInput.value.trim();
+        if (content) {
+          const notes = JSON.parse(localStorage.getItem("notes")) || [];
+          notes.push(content);
+          localStorage.setItem("notes", JSON.stringify(notes));
+          displayNote(content, notes.length - 1);
+          noteInput.value = ""; 
+        }
+      }
+
+      function deleteNote(index) {
+        const notes = JSON.parse(localStorage.getItem("notes")) || [];
+        notes.splice(index, 1); 
+        localStorage.setItem("notes", JSON.stringify(notes));
+        loadNotes(); 
+      }
+
+      // Add event listener to the add note button
+      addNoteButton.addEventListener("click", addNote);
+    </script>
   </body>
 </html>
